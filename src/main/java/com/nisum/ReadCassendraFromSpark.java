@@ -8,6 +8,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.SparkSession;
+import scala.collection.immutable.List;
 
 public class ReadCassendraFromSpark {
     public static void main(String ...vr){
@@ -34,7 +35,7 @@ public class ReadCassendraFromSpark {
                                    row.getString("role"));
         });
         System.out.println("---------------------------");
-        contactListRDD.foreach(System.out::println);
-
+        System.out.println("---------list-------------"+contactListRDD.collect().size());
+        contactListRDD.map(obj->obj.toString()).collect().stream().forEach(System.out::println);
                 }
 }
